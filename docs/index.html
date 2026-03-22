@@ -478,218 +478,1921 @@
       <div class="columns is-centered">
         <div class="column is-12 has-text-centered">
 
-          <div class="model-labels-container is-size-5">
-            <span><b>Baseline Encoders</b>:</span>
-            <a href="https://arxiv.org/abs/2306.02329" target="_blank" style="padding: 5px 10px;">MultiCLIP (MC)</a>,
-            <a href="https://arxiv.org/abs/2403.15377v4" target="_blank" style="padding: 5px 10px;">InternVideo2-1b
-              (IV2)</a>
-            <p></p>
-          </div>
-          <div class="model-labels-container is-size-5">
-            <span><b>Datasets</b>:</span>
-            <span style="background-color: rgba(110, 194, 134, 0.15);padding: 5px 10px;">MultiVENT</span>
-            <span style="background-color: rgba(255, 208, 80, 0.15);padding: 5px 10px;">MSR-VTT-1kA</span>
-            <p></p>
-          </div>
-
-          <table class="table is-bordered" style="width: 100%; border-collapse: collapse;">
+          <table class="table is-bordered" style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
             <thead>
               <tr style="background-color: rgba(211, 211, 211, 0.5);">
-                <th>Method</th>
-                <th>Pre@1 ↑</th>
-                <th>Pre@5 ↑</th>
-                <th>Pre@10 ↑</th>
-                <th>Re@1 ↑</th>
-                <th>Re@5 ↑</th>
-                <th>Re@10 ↑</th>
-                <th>MRR ↑</th>
-                <th>NDCG ↑</th>
-                <th>MAP ↑</th>
-                <th>Mean Rank ↓</th>
-                <th>Median Rank ↓</th>
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;">Models</th>
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;">Domain</th>
+                <th colspan="3" style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Zero-Shot</b></th>
+                <th colspan="3" style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Few-Shot</b></th>
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;"><b>CoT VQA</b></th>
+              </tr>
+              <tr style="background-color: rgba(211, 211, 211, 0.3);">
+                <th colspan="2" style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>Caption</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>VQA</b></th>
+                <th colspan="2" style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>Caption</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>VQA</b></th>
+              </tr>
+              <tr style="background-color: rgba(211, 211, 211, 0.2);">
+                <th style="text-align: center; padding: 8px;"><b>B-F1</b></th>
+                <th style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>LLM</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Accuracy (%)</b></th>
+                <th style="text-align: center; padding: 8px;"><b>B-F1</b></th>
+                <th style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>LLM</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Accuracy (%)</b></th>
               </tr>
             </thead>
             <tbody>
-              <tr style="background-color: rgba(110, 194, 134, 0.15);">
-                <td>MC</td>
-                <td><u>9.83</u></td>
-                <td><u>44.32</u></td>
-                <td><u>70.82</u></td>
-                <td><u>88.80</u></td>
-                <td><u>80.77</u></td>
-                <td><u>65.25</u></td>
-                <td><u>0.92</u></td>
-                <td><u>75.34</u></td>
-                <td><u>86.33</u></td>
-                <td><u>22.12</u></td>
-                <td><u><b>6</b></u></td>
+              <!-- Gemma3-4B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-4B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.63</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.59</td>
+                <td style="text-align: center;">0.52</td>
               </tr>
-              <tr style="background-color: rgba(110, 194, 134, 0.15);">
-                <td>IV2</td>
-                <td>5.60</td>
-                <td>28.92</td>
-                <td>49.12</td>
-                <td>51.35</td>
-                <td>53.28</td>
-                <td>45.44</td>
-                <td>0.68</td>
-                <td>50.43</td>
-                <td>63.77</td>
-                <td>235.49</td>
-                <td>11</td>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.74</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.63</td>
+                <td style="text-align: center;">0.78</td>
               </tr>
-
-              <tr style="background-color: rgba(110, 194, 134, 0.15);">
-                <td>MC + BanglaVerse</td>
-                <td>10.24</td>
-                <td>46.71</td>
-                <td>75.76</td>
-                <td>92.28</td>
-                <td>85.25</td>
-                <td>69.73</td>
-                <td><b>0.95</b></td>
-                <td>80.04</td>
-                <td>89.42</td>
-                <td>21.13</td>
-                <td><b>6</b></td>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.47</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.47</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.37</td>
+                <td style="text-align: center;">0.44</td>
               </tr>
-              <tr style="background-color: rgba(110, 194, 134, 0.15);">
-                <td>MC + BanglaVerse + ASR</td>
-                <td><b>10.32</b></td>
-                <td><b>49.00</b></td>
-                <td><b>79.60</b></td>
-                <td><b>93.05</b></td>
-                <td><b>88.73</b></td>
-                <td><b>73.09</b></td>
-                <td><b>0.95</b></td>
-                <td><b>83.24</b></td>
-                <td><b>91.20</b></td>
-                <td><b>16.44</b></td>
-                <td><b>6</b></td>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.30</td>
+                <td style="text-align: center;">0.84</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.32</td>
+                <td style="text-align: center;">0.38</td>
               </tr>
-
-
-              <tr style="background-color: rgba(110, 194, 134, 0.15);">
-                <td>IV2 + BanglaVerse</td>
-                <td>9.54</td>
-                <td>40.88</td>
-                <td>63.40</td>
-                <td>87.26</td>
-                <td>75.21</td>
-                <td>58.73</td>
-                <td>0.92</td>
-                <td>69.15</td>
-                <td>83.96</td>
-                <td>53.84</td>
-                <td>7</td>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.31</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.29</td>
+                <td style="text-align: center;">0.36</td>
               </tr>
-              <tr style="background-color: rgba(110, 194, 134, 0.15);">
-                <td>IV2 + BanglaVerse + ASR</td>
-                <td>10.24</td>
-                <td>44.94</td>
-                <td>70.79</td>
-                <td>92.28</td>
-                <td>81.85</td>
-                <td>65.14</td>
-                <td><b>0.95</b></td>
-                <td>76.10</td>
-                <td>88.09</td>
-                <td>42.81</td>
-                <td><b>6</b></td>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.66</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.74</td>
+                <td style="text-align: center;">0.59</td>
               </tr>
-
-
-              <tr style="background-color: rgba(255, 208, 80, 0.15);">
-                <td>MC</td>
-                <td>43.52</td>
-                <td>69.05</td>
-                <td>76.88</td>
-                <td>43.62</td>
-                <td>13.85</td>
-                <td>7.71</td>
-                <td>0.54</td>
-                <td>59.72</td>
-                <td>54.27</td>
-                <td><u>20.29</u></td>
-                <td>2</td>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.45</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.61</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.62</td>
+                <td style="text-align: center;">0.49</td>
               </tr>
-              <tr style="background-color: rgba(255, 208, 80, 0.15);">
-                <td>IV2</td>
-                <td><u>52.56</u></td>
-                <td><u>73.07</u></td>
-                <td><u>80.10</u></td>
-                <td><u>52.66</u></td>
-                <td><u>14.65</u></td>
-                <td><u>8.03</u></td>
-                <td><u>0.62</u></td>
-                <td><u>66.07</u></td>
-                <td><u>61.62</u></td>
-                <td>25.12</td>
-                <td><u><b>1</b></u></td>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.39</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.40</td>
+                <td style="text-align: center;">0.39</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.44</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.26</td>
+                <td style="text-align: center;">0.48</td>
               </tr>
 
-              <tr style="background-color: rgba(255, 208, 80, 0.15);">
-                <td>MC + BanglaVerse</td>
-                <td>44.52</td>
-                <td>71.26</td>
-                <td>79.40</td>
-                <td>44.62</td>
-                <td>14.29</td>
-                <td>7.96</td>
-                <td>0.56</td>
-                <td>61.51</td>
-                <td>55.84</td>
-                <td>17.91</td>
-                <td>2</td>
+              <!-- Gemma3-12B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-12B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.68</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.70</td>
+                <td style="text-align: center;">0.72</td>
               </tr>
-              <tr style="background-color: rgba(255, 208, 80, 0.15);">
-                <td>MC + BanglaVerse + ASR</td>
-                <td>46.23</td>
-                <td>73.37</td>
-                <td>81.71</td>
-                <td>46.33</td>
-                <td>14.71</td>
-                <td>8.19</td>
-                <td>0.58</td>
-                <td>63.59</td>
-                <td>57.83</td>
-                <td>18.73</td>
-                <td>2</td>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.83</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.82</td>
+                <td style="text-align: center;">0.89</td>
               </tr>
-              <tr style="background-color: rgba(255, 208, 80, 0.15);">
-                <td>IV2 + BanglaVerse</td>
-                <td>53.47</td>
-                <td>73.57</td>
-                <td>82.11</td>
-                <td>53.57</td>
-                <td>14.75</td>
-                <td>8.23</td>
-                <td>0.62</td>
-                <td>67.16</td>
-                <td>62.47</td>
-                <td>16.73</td>
-                <td><b>1</b></td>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.62</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.63</td>
+                <td style="text-align: center;">0.75</td>
               </tr>
-              <tr style="background-color: rgba(255, 208, 80, 0.15);">
-                <td>IV2 + BanglaVerse + ASR</td>
-                <td><b>56.28</b></td>
-                <td><b>76.58</b></td>
-                <td><b>83.72</b></td>
-                <td><b>56.38</b></td>
-                <td><b>15.36</b></td>
-                <td><b>8.39</b></td>
-                <td><b>0.65</b></td>
-                <td><b>69.53</b></td>
-                <td><b>65.06</b></td>
-                <td><b>15.85</b></td>
-                <td><b>1</b></td>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.40</td>
+                <td style="text-align: center;">0.78</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.32</td>
+                <td style="text-align: center;">0.33</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.49</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.50</td>
+                <td style="text-align: center;">0.59</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.63</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.59</td>
+                <td style="text-align: center;">0.66</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.64</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.67</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.70</td>
+                <td style="text-align: center;">0.74</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.55</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.56</td>
+                <td style="text-align: center;">0.61</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.53</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.47</td>
+                <td style="text-align: center;">0.46</td>
+              </tr>
+
+              <!-- Gemma3-27B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-27B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.44</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.72</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.73</td>
+                <td style="text-align: center;">0.73</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.87</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.89</td>
+                <td style="text-align: center;">0.89</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.69</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.69</td>
+                <td style="text-align: center;">0.74</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.47</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.36</td>
+                <td style="text-align: center;">0.82</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.32</td>
+                <td style="text-align: center;">0.42</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.51</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.51</td>
+                <td style="text-align: center;">0.78</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.66</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.59</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.72</td>
+                <td style="text-align: center;">0.78</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.78</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.83</td>
+                <td style="text-align: center;">0.76</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.56</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.50</td>
+                <td style="text-align: center;">0.62</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.69</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.60</td>
+                <td style="text-align: center;">0.74</td>
+              </tr>
+
+              <!-- Qwen2.5-VL-7B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Qwen2.5-VL-7B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.46</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.55</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.47</td>
+                <td style="text-align: center;">0.59</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.42</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.68</td>
+                <td style="text-align: center;">0.64</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.54</td>
+                <td style="text-align: center;">0.68</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.60</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.52</td>
+                <td style="text-align: center;">0.52</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.44</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.22</td>
+                <td style="text-align: center;">0.76</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.27</td>
+                <td style="text-align: center;">0.17</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.46</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.69</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.71</td>
+                <td style="text-align: center;">0.54</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.42</td>
+                <td style="text-align: center;">0.55</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.38</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.64</td>
+                <td style="text-align: center;">0.39</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.44</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.47</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.46</td>
+                <td style="text-align: center;">0.56</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.46</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.39</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.32</td>
+                <td style="text-align: center;">0.41</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.47</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.48</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.48</td>
+                <td style="text-align: center;">0.40</td>
+              </tr>
+
+              <!-- Qwen3-VL-8B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Qwen3-VL-8B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.44</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.68</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.42</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.68</td>
+                <td style="text-align: center;">0.62</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.42</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.70</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.47</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.66</td>
+                <td style="text-align: center;">0.66</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.44</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.69</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.39</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.69</td>
+                <td style="text-align: center;">0.78</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.36</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.40</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.37</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.28</td>
+                <td style="text-align: center;">0.38</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.40</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.78</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.37</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.63</td>
+                <td style="text-align: center;">0.70</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.43</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.46</td>
+                <td style="text-align: center;">0.64</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.47</td>
+                <td style="text-align: center;">0.52</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.63</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.41</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.51</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.45</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.52</td>
+                <td style="text-align: center;">0.57</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.64</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.40</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.45</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.43</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.48</td>
+                <td style="text-align: center;">0.45</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.41</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.49</td>
+                <td style="text-align: center;">0.64</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.34</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.60</td>
+                <td style="text-align: center;">0.45</td>
+              </tr>
+
+              <!-- GPT-4.1-mini -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>GPT-4.1-mini</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.65</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.56</td>
+                <td style="text-align: center;">0.77</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.88</td>
+                <td style="text-align: center;">0.73</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.81</td>
+                <td style="text-align: center;">0.94</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.66</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.60</td>
+                <td style="text-align: center;">0.72</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.49</td>
+                <td style="text-align: center;">0.89</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.42</td>
+                <td style="text-align: center;">0.46</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.62</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.58</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.60</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.57</td>
+                <td style="text-align: center;">0.78</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.60</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.57</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.56</td>
+                <td style="text-align: center;">0.65</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.65</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.60</td>
+                <td style="text-align: center;">0.75</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.50</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.50</td>
+                <td style="text-align: center;">0.61</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.53</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.48</td>
+                <td style="text-align: center;">0.69</td>
               </tr>
             </tbody>
           </table>
           <p style="text-align:center">
-            The best score for each dataset is <b>in bold</b> and the best in baselines is <u>underlined</u>.<br>
-            More ablation results are presented in the paper.
-            <!--"-" means the answer of MLLM is meaningless or in wrong format. -->
+            <b>Full results by model and domain for Bangla Language.</b>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-12 has-text-centered">
+
+          <h2 class="title is-4" style="margin-top: 3rem;">English Language Results</h2>
+
+          <table class="table is-bordered" style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+            <thead>
+              <tr style="background-color: rgba(211, 211, 211, 0.5);">
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;">Models</th>
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;">Domain</th>
+                <th colspan="3" style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Zero-Shot</b></th>
+                <th colspan="3" style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Few-Shot</b></th>
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;"><b>CoT VQA</b></th>
+              </tr>
+              <tr style="background-color: rgba(211, 211, 211, 0.3);">
+                <th colspan="2" style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>Caption</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>VQA</b></th>
+                <th colspan="2" style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>Caption</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>VQA</b></th>
+              </tr>
+              <tr style="background-color: rgba(211, 211, 211, 0.2);">
+                <th style="text-align: center; padding: 8px;"><b>B-F1</b></th>
+                <th style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>LLM</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Accuracy (%)</b></th>
+                <th style="text-align: center; padding: 8px;"><b>B-F1</b></th>
+                <th style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>LLM</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Accuracy (%)</b></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Gemma3-4B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-4B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.65</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.72</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.58</td>
+                <td style="text-align: center;">0.50</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.75</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.70</td>
+                <td style="text-align: center;">0.68</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.43</td>
+                <td style="text-align: center;">0.84</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.44</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.40</td>
+                <td style="text-align: center;">0.44</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.26</td>
+                <td style="text-align: center;">0.92</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.34</td>
+                <td style="text-align: center;">0.42</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.63</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.41</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.34</td>
+                <td style="text-align: center;">0.33</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.66</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.55</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.59</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.55</td>
+                <td style="text-align: center;">0.39</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.57</td>
+                <td style="text-align: center;">0.84</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.52</td>
+                <td style="text-align: center;">0.56</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.84</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.41</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.43</td>
+                <td style="text-align: center;">0.44</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.60</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.54</td>
+                <td style="text-align: center;">0.84</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.43</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.42</td>
+                <td style="text-align: center;">0.55</td>
+              </tr>
+
+              <!-- Gemma3-12B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-12B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.62</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.69</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.72</td>
+                <td style="text-align: center;">0.71</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.59</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.73</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.77</td>
+                <td style="text-align: center;">0.73</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.60</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.62</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.60</td>
+                <td style="text-align: center;">0.74</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.44</td>
+                <td style="text-align: center;">0.90</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.59</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.30</td>
+                <td style="text-align: center;">0.40</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.63</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.57</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.50</td>
+                <td style="text-align: center;">0.60</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.64</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.53</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.58</td>
+                <td style="text-align: center;">0.64</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.62</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.71</td>
+                <td style="text-align: center;">0.65</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.52</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.52</td>
+                <td style="text-align: center;">0.63</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.61</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.56</td>
+                <td style="text-align: center;">0.62</td>
+              </tr>
+
+              <!-- Gemma3-27B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-27B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.66</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.77</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.75</td>
+                <td style="text-align: center;">0.80</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.62</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.88</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.84</td>
+                <td style="text-align: center;">0.82</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.65</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.62</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.62</td>
+                <td style="text-align: center;">0.73</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.41</td>
+                <td style="text-align: center;">0.92</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.36</td>
+                <td style="text-align: center;">0.45</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.62</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.65</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.50</td>
+                <td style="text-align: center;">0.86</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.67</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.60</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.61</td>
+                <td style="text-align: center;">0.68</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.81</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.79</td>
+                <td style="text-align: center;">0.77</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.51</td>
+                <td style="text-align: center;">0.84</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.47</td>
+                <td style="text-align: center;">0.49</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.66</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.70</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.70</td>
+                <td style="text-align: center;">0.61</td>
+              </tr>
+
+              <!-- Qwen2.5-VL-7B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Qwen2.5-VL-7B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.69</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.62</td>
+                <td style="text-align: center;">0.84</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.59</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.65</td>
+                <td style="text-align: center;">0.58</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.60</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.77</td>
+                <td style="text-align: center;">0.81</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.62</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.72</td>
+                <td style="text-align: center;">0.75</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.62</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.54</td>
+                <td style="text-align: center;">0.60</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.32</td>
+                <td style="text-align: center;">0.90</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.30</td>
+                <td style="text-align: center;">0.37</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.88</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.64</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.60</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.62</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.51</td>
+                <td style="text-align: center;">0.61</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.68</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.49</td>
+                <td style="text-align: center;">0.77</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.40</td>
+                <td style="text-align: center;">0.48</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.51</td>
+                <td style="text-align: center;">0.84</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.52</td>
+                <td style="text-align: center;">0.60</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.49</td>
+                <td style="text-align: center;">0.84</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.42</td>
+                <td style="text-align: center;">0.56</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.59</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.60</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.49</td>
+                <td style="text-align: center;">0.59</td>
+              </tr>
+
+              <!-- Qwen3-VL-8B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Qwen3-VL-8B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.63</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.71</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.66</td>
+                <td style="text-align: center;">0.64</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.62</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.78</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.73</td>
+                <td style="text-align: center;">0.71</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.62</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.64</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.61</td>
+                <td style="text-align: center;">0.63</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.37</td>
+                <td style="text-align: center;">0.91</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.31</td>
+                <td style="text-align: center;">0.45</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.73</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.65</td>
+                <td style="text-align: center;">0.88</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.60</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.56</td>
+                <td style="text-align: center;">0.69</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.46</td>
+                <td style="text-align: center;">0.81</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.43</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.38</td>
+                <td style="text-align: center;">0.47</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.64</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.64</td>
+                <td style="text-align: center;">0.63</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.82</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.45</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.45</td>
+                <td style="text-align: center;">0.42</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.59</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.60</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.55</td>
+                <td style="text-align: center;">0.65</td>
+              </tr>
+
+              <!-- GPT-4.1-mini -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>GPT-4.1-mini</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.64</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.72</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.66</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.68</td>
+                <td style="text-align: center;">0.76</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.64</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.87</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.67</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.78</td>
+                <td style="text-align: center;">0.92</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.84</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.64</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.66</td>
+                <td style="text-align: center;">0.70</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.43</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.51</td>
+                <td style="text-align: center;">0.95</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.66</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.36</td>
+                <td style="text-align: center;">0.51</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.88</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.66</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.68</td>
+                <td style="text-align: center;">0.88</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.69</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.55</td>
+                <td style="text-align: center;">0.77</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.66</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.65</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.63</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.58</td>
+                <td style="text-align: center;">0.70</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.83</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.76</td>
+                <td style="text-align: center;">0.82</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.83</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.40</td>
+                <td style="text-align: center;">0.85</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.43</td>
+                <td style="text-align: center;">0.58</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.56</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.46</td>
+                <td style="text-align: center;">0.75</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="text-align:center">
+            <b>Full results by model and domain for English Language.</b>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-12 has-text-centered">
+
+          <h2 class="title is-4" style="margin-top: 3rem;">Hindi Language Results</h2>
+
+          <table class="table is-bordered" style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+            <thead>
+              <tr style="background-color: rgba(211, 211, 211, 0.5);">
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;">Models</th>
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;">Domain</th>
+                <th colspan="3" style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Zero-Shot</b></th>
+                <th colspan="3" style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Few-Shot</b></th>
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;"><b>CoT VQA</b></th>
+              </tr>
+              <tr style="background-color: rgba(211, 211, 211, 0.3);">
+                <th colspan="2" style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>Caption</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>VQA</b></th>
+                <th colspan="2" style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>Caption</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>VQA</b></th>
+              </tr>
+              <tr style="background-color: rgba(211, 211, 211, 0.2);">
+                <th style="text-align: center; padding: 8px;"><b>B-F1</b></th>
+                <th style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>LLM</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Accuracy (%)</b></th>
+                <th style="text-align: center; padding: 8px;"><b>B-F1</b></th>
+                <th style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>LLM</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Accuracy (%)</b></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Gemma3-4B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-4B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.72</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.53</td>
+                <td style="text-align: center;">0.58</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.70</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.57</td>
+                <td style="text-align: center;">0.65</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.52</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.47</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.32</td>
+                <td style="text-align: center;">0.52</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.26</td>
+                <td style="text-align: center;">0.84</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.25</td>
+                <td style="text-align: center;">0.32</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.29</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.30</td>
+                <td style="text-align: center;">0.38</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.66</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.61</td>
+                <td style="text-align: center;">0.34</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.57</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.47</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.45</td>
+                <td style="text-align: center;">0.45</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.36</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.45</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.41</td>
+                <td style="text-align: center;">0.40</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.47</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.46</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.37</td>
+                <td style="text-align: center;">0.44</td>
+              </tr>
+
+              <!-- Gemma3-12B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-12B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.61</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.62</td>
+                <td style="text-align: center;">0.68</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.73</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.67</td>
+                <td style="text-align: center;">0.77</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.62</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.59</td>
+                <td style="text-align: center;">0.71</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.40</td>
+                <td style="text-align: center;">0.81</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.34</td>
+                <td style="text-align: center;">0.35</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.52</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.37</td>
+                <td style="text-align: center;">0.68</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.46</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.57</td>
+                <td style="text-align: center;">0.56</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.54</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.57</td>
+                <td style="text-align: center;">0.62</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.43</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.45</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.49</td>
+                <td style="text-align: center;">0.47</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.47</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.45</td>
+                <td style="text-align: center;">0.52</td>
+              </tr>
+
+              <!-- Gemma3-27B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-27B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.71</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.73</td>
+                <td style="text-align: center;">0.73</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.84</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.81</td>
+                <td style="text-align: center;">0.87</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.67</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.63</td>
+                <td style="text-align: center;">0.72</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.38</td>
+                <td style="text-align: center;">0.86</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.33</td>
+                <td style="text-align: center;">0.42</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.73</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.54</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.55</td>
+                <td style="text-align: center;">0.82</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.59</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.61</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.57</td>
+                <td style="text-align: center;">0.62</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.66</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.68</td>
+                <td style="text-align: center;">0.68</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.49</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.49</td>
+                <td style="text-align: center;">0.45</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.56</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.53</td>
+                <td style="text-align: center;">0.53</td>
+              </tr>
+
+              <!-- Qwen2.5-VL-7B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Qwen2.5-VL-7B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.47</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.57</td>
+                <td style="text-align: center;">0.64</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.43</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.56</td>
+                <td style="text-align: center;">0.60</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.41</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.64</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.36</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.67</td>
+                <td style="text-align: center;">0.63</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.58</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.38</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.48</td>
+                <td style="text-align: center;">0.55</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.39</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.29</td>
+                <td style="text-align: center;">0.80</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.43</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.22</td>
+                <td style="text-align: center;">0.36</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.75</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.47</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.58</td>
+                <td style="text-align: center;">0.47</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.41</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.50</td>
+                <td style="text-align: center;">0.45</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.43</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.33</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.43</td>
+                <td style="text-align: center;">0.45</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.46</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.40</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.47</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.34</td>
+                <td style="text-align: center;">0.41</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.48</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.48</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.42</td>
+                <td style="text-align: center;">0.46</td>
+              </tr>
+
+              <!-- Qwen3-VL-8B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Qwen3-VL-8B</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.60</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.40</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.52</td>
+                <td style="text-align: center;">0.64</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.72</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.34</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.65</td>
+                <td style="text-align: center;">0.75</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.66</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.43</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.71</td>
+                <td style="text-align: center;">0.70</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.67</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.37</td>
+                <td style="text-align: center;">0.78</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.41</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.29</td>
+                <td style="text-align: center;">0.37</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.66</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.47</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.70</td>
+                <td style="text-align: center;">0.76</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.70</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.60</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.36</td>
+                <td style="text-align: center;">0.60</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.38</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.40</td>
+                <td style="text-align: center;">0.47</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.49</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.48</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.48</td>
+                <td style="text-align: center;">0.49</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.66</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.51</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.43</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.47</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.45</td>
+                <td style="text-align: center;">0.43</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.53</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.50</td>
+                <td style="text-align: center;">0.47</td>
+              </tr>
+
+              <!-- GPT-4.1-mini -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>GPT-4.1-mini</code></td>
+                <td>Cult.</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.59</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.64</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.61</td>
+                <td style="text-align: center;">0.71</td>
+              </tr>
+              <tr>
+                <td>Food</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.57</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.85</td>
+                <td style="text-align: center;">0.73</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.59</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.70</td>
+                <td style="text-align: center;">0.83</td>
+              </tr>
+              <tr>
+                <td>Hist.</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.70</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.55</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.59</td>
+                <td style="text-align: center;">0.68</td>
+              </tr>
+              <tr>
+                <td>M&amp;M</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.38</td>
+                <td style="text-align: center;">0.87</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.58</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.37</td>
+                <td style="text-align: center;">0.42</td>
+              </tr>
+              <tr>
+                <td>Nat. Achv.</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.61</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.59</td>
+                <td style="text-align: center;">0.72</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.64</td>
+                <td style="text-align: center;">0.73</td>
+              </tr>
+              <tr>
+                <td>Nature</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.62</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.49</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.59</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.38</td>
+                <td style="text-align: center;">0.53</td>
+              </tr>
+              <tr>
+                <td>Pers.</td>
+                <td style="text-align: center;">0.65</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.50</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.60</td>
+                <td style="text-align: center;">0.71</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.50</td>
+                <td style="text-align: center;">0.72</td>
+              </tr>
+              <tr>
+                <td>Pol.</td>
+                <td style="text-align: center;">0.68</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.53</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.46</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.52</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.53</td>
+                <td style="text-align: center;">0.49</td>
+              </tr>
+              <tr>
+                <td>Sports</td>
+                <td style="text-align: center;">0.69</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.56</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.44</td>
+                <td style="text-align: center;">0.74</td>
+                <td style="text-align: center; border-right: 1px solid #ddd;">0.54</td>
+                <td style="text-align: center; border-right: 2px solid #999;">0.44</td>
+                <td style="text-align: center;">0.53</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="text-align:center">
+            <b>Full results by model and domain for Hindi Language.</b>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-12 has-text-centered">
+
+          <h2 class="title is-4" style="margin-top: 3rem;">Urdu Language Results</h2>
+
+          <table class="table is-bordered" style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+            <thead>
+              <tr style="background-color: rgba(211, 211, 211, 0.5);">
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;">Models</th>
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;">Domain</th>
+                <th colspan="3" style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Zero-Shot</b></th>
+                <th colspan="3" style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Few-Shot</b></th>
+                <th rowspan="3" style="text-align: center; vertical-align: middle; padding: 8px;"><b>CoT VQA</b></th>
+              </tr>
+              <tr style="background-color: rgba(211, 211, 211, 0.3);">
+                <th colspan="2" style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>Caption</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>VQA</b></th>
+                <th colspan="2" style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>Caption</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>VQA</b></th>
+              </tr>
+              <tr style="background-color: rgba(211, 211, 211, 0.2);">
+                <th style="text-align: center; padding: 8px;"><b>B-F1</b></th>
+                <th style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>LLM</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Accuracy (%)</b></th>
+                <th style="text-align: center; padding: 8px;"><b>B-F1</b></th>
+                <th style="text-align: center; border-right: 1px solid #999; padding: 8px;"><b>LLM</b></th>
+                <th style="text-align: center; border-right: 2px solid #999; padding: 8px;"><b>Accuracy (%)</b></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Gemma3-4B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-4B</code></td>
+                <td>Cult.</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.48</td><td style="text-align: center; border-right: 2px solid #999;">0.57</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.48</td><td style="text-align: center; border-right: 2px solid #999;">0.34</td><td style="text-align: center;">0.48</td>
+              </tr>
+              <tr><td>Food</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.46</td><td style="text-align: center; border-right: 2px solid #999;">0.63</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.47</td><td style="text-align: center; border-right: 2px solid #999;">0.52</td><td style="text-align: center;">0.56</td></tr>
+              <tr><td>Hist.</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.49</td><td style="text-align: center; border-right: 2px solid #999;">0.51</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.44</td><td style="text-align: center; border-right: 2px solid #999;">0.37</td><td style="text-align: center;">0.45</td></tr>
+              <tr><td>M&amp;M</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.45</td><td style="text-align: center; border-right: 2px solid #999;">0.19</td><td style="text-align: center;">0.85</td><td style="text-align: center; border-right: 1px solid #ddd;">0.52</td><td style="text-align: center; border-right: 2px solid #999;">0.24</td><td style="text-align: center;">0.28</td></tr>
+              <tr><td>Nat. Achv.</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.49</td><td style="text-align: center; border-right: 2px solid #999;">0.31</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.46</td><td style="text-align: center; border-right: 2px solid #999;">0.26</td><td style="text-align: center;">0.38</td></tr>
+              <tr><td>Nature</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.49</td><td style="text-align: center; border-right: 2px solid #999;">0.67</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.51</td><td style="text-align: center; border-right: 2px solid #999;">0.57</td><td style="text-align: center;">0.41</td></tr>
+              <tr><td>Pers.</td><td style="text-align: center;">0.65</td><td style="text-align: center; border-right: 1px solid #ddd;">0.45</td><td style="text-align: center; border-right: 2px solid #999;">0.52</td><td style="text-align: center;">0.68</td><td style="text-align: center; border-right: 1px solid #ddd;">0.48</td><td style="text-align: center; border-right: 2px solid #999;">0.43</td><td style="text-align: center;">0.47</td></tr>
+              <tr><td>Pol.</td><td style="text-align: center;">0.67</td><td style="text-align: center; border-right: 1px solid #ddd;">0.47</td><td style="text-align: center; border-right: 2px solid #999;">0.37</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.47</td><td style="text-align: center; border-right: 2px solid #999;">0.37</td><td style="text-align: center;">0.41</td></tr>
+              <tr><td>Sports</td><td style="text-align: center;">0.68</td><td style="text-align: center; border-right: 1px solid #ddd;">0.47</td><td style="text-align: center; border-right: 2px solid #999;">0.39</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.48</td><td style="text-align: center; border-right: 2px solid #999;">0.34</td><td style="text-align: center;">0.52</td></tr>
+
+              <!-- Gemma3-12B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-12B</code></td>
+                <td>Cult.</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.54</td><td style="text-align: center; border-right: 2px solid #999;">0.56</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.50</td><td style="text-align: center; border-right: 2px solid #999;">0.64</td><td style="text-align: center;">0.60</td>
+              </tr>
+              <tr><td>Food</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.51</td><td style="text-align: center; border-right: 2px solid #999;">0.67</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.51</td><td style="text-align: center; border-right: 2px solid #999;">0.65</td><td style="text-align: center;">0.68</td></tr>
+              <tr><td>Hist.</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.53</td><td style="text-align: center; border-right: 2px solid #999;">0.59</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.48</td><td style="text-align: center; border-right: 2px solid #999;">0.59</td><td style="text-align: center;">0.63</td></tr>
+              <tr><td>M&amp;M</td><td style="text-align: center;">0.72</td><td style="text-align: center; border-right: 1px solid #ddd;">0.52</td><td style="text-align: center; border-right: 2px solid #999;">0.26</td><td style="text-align: center;">0.83</td><td style="text-align: center; border-right: 1px solid #ddd;">0.53</td><td style="text-align: center; border-right: 2px solid #999;">0.28</td><td style="text-align: center;">0.32</td></tr>
+              <tr><td>Nat. Achv.</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.55</td><td style="text-align: center; border-right: 2px solid #999;">0.55</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.50</td><td style="text-align: center; border-right: 2px solid #999;">0.43</td><td style="text-align: center;">0.64</td></tr>
+              <tr><td>Nature</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.56</td><td style="text-align: center; border-right: 2px solid #999;">0.36</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.56</td><td style="text-align: center; border-right: 2px solid #999;">0.47</td><td style="text-align: center;">0.46</td></tr>
+              <tr><td>Pers.</td><td style="text-align: center;">0.66</td><td style="text-align: center; border-right: 1px solid #ddd;">0.49</td><td style="text-align: center; border-right: 2px solid #999;">0.47</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.50</td><td style="text-align: center; border-right: 2px solid #999;">0.61</td><td style="text-align: center;">0.55</td></tr>
+              <tr><td>Pol.</td><td style="text-align: center;">0.68</td><td style="text-align: center; border-right: 1px solid #ddd;">0.53</td><td style="text-align: center; border-right: 2px solid #999;">0.41</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.47</td><td style="text-align: center; border-right: 2px solid #999;">0.50</td><td style="text-align: center;">0.50</td></tr>
+              <tr><td>Sports</td><td style="text-align: center;">0.68</td><td style="text-align: center; border-right: 1px solid #ddd;">0.54</td><td style="text-align: center; border-right: 2px solid #999;">0.42</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.50</td><td style="text-align: center; border-right: 2px solid #999;">0.52</td><td style="text-align: center;">0.50</td></tr>
+
+              <!-- Gemma3-27B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Gemma3-27B</code></td>
+                <td>Cult.</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.58</td><td style="text-align: center; border-right: 2px solid #999;">0.61</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.52</td><td style="text-align: center; border-right: 2px solid #999;">0.68</td><td style="text-align: center;">0.68</td>
+              </tr>
+              <tr><td>Food</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.56</td><td style="text-align: center; border-right: 2px solid #999;">0.72</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.53</td><td style="text-align: center; border-right: 2px solid #999;">0.77</td><td style="text-align: center;">0.78</td></tr>
+              <tr><td>Hist.</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.58</td><td style="text-align: center; border-right: 2px solid #999;">0.65</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.49</td><td style="text-align: center; border-right: 2px solid #999;">0.64</td><td style="text-align: center;">0.70</td></tr>
+              <tr><td>M&amp;M</td><td style="text-align: center;">0.73</td><td style="text-align: center; border-right: 1px solid #ddd;">0.51</td><td style="text-align: center; border-right: 2px solid #999;">0.32</td><td style="text-align: center;">0.87</td><td style="text-align: center; border-right: 1px solid #ddd;">0.52</td><td style="text-align: center; border-right: 2px solid #999;">0.32</td><td style="text-align: center;">0.35</td></tr>
+              <tr><td>Nat. Achv.</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.61</td><td style="text-align: center; border-right: 2px solid #999;">0.58</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.54</td><td style="text-align: center; border-right: 2px solid #999;">0.57</td><td style="text-align: center;">0.83</td></tr>
+              <tr><td>Nature</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.59</td><td style="text-align: center; border-right: 2px solid #999;">0.41</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.56</td><td style="text-align: center; border-right: 2px solid #999;">0.57</td><td style="text-align: center;">0.51</td></tr>
+              <tr><td>Pers.</td><td style="text-align: center;">0.66</td><td style="text-align: center; border-right: 1px solid #ddd;">0.49</td><td style="text-align: center; border-right: 2px solid #999;">0.56</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.51</td><td style="text-align: center; border-right: 2px solid #999;">0.61</td><td style="text-align: center;">0.59</td></tr>
+              <tr><td>Pol.</td><td style="text-align: center;">0.68</td><td style="text-align: center; border-right: 1px solid #ddd;">0.54</td><td style="text-align: center; border-right: 2px solid #999;">0.45</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.49</td><td style="text-align: center; border-right: 2px solid #999;">0.46</td><td style="text-align: center;">0.48</td></tr>
+              <tr><td>Sports</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.60</td><td style="text-align: center; border-right: 2px solid #999;">0.61</td><td style="text-align: center;">0.73</td><td style="text-align: center; border-right: 1px solid #ddd;">0.49</td><td style="text-align: center; border-right: 2px solid #999;">0.60</td><td style="text-align: center;">0.61</td></tr>
+
+              <!-- Qwen2.5-VL-7B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Qwen2.5-VL-7B</code></td>
+                <td>Cult.</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.43</td><td style="text-align: center; border-right: 2px solid #999;">0.58</td><td style="text-align: center;">0.65</td><td style="text-align: center; border-right: 1px solid #ddd;">0.42</td><td style="text-align: center; border-right: 2px solid #999;">0.54</td><td style="text-align: center;">0.55</td>
+              </tr>
+              <tr><td>Food</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.34</td><td style="text-align: center; border-right: 2px solid #999;">0.66</td><td style="text-align: center;">0.64</td><td style="text-align: center; border-right: 1px solid #ddd;">0.32</td><td style="text-align: center; border-right: 2px solid #999;">0.56</td><td style="text-align: center;">0.60</td></tr>
+              <tr><td>Hist.</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.46</td><td style="text-align: center; border-right: 2px solid #999;">0.58</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.41</td><td style="text-align: center; border-right: 2px solid #999;">0.54</td><td style="text-align: center;">0.54</td></tr>
+              <tr><td>M&amp;M</td><td style="text-align: center;">0.66</td><td style="text-align: center; border-right: 1px solid #ddd;">0.35</td><td style="text-align: center; border-right: 2px solid #999;">0.24</td><td style="text-align: center;">0.80</td><td style="text-align: center; border-right: 1px solid #ddd;">0.41</td><td style="text-align: center; border-right: 2px solid #999;">0.29</td><td style="text-align: center;">0.35</td></tr>
+              <tr><td>Nat. Achv.</td><td style="text-align: center;">0.68</td><td style="text-align: center; border-right: 1px solid #ddd;">0.40</td><td style="text-align: center; border-right: 2px solid #999;">0.67</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.46</td><td style="text-align: center; border-right: 2px solid #999;">0.65</td><td style="text-align: center;">0.55</td></tr>
+              <tr><td>Nature</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.43</td><td style="text-align: center; border-right: 2px solid #999;">0.49</td><td style="text-align: center;">0.56</td><td style="text-align: center; border-right: 1px solid #ddd;">0.32</td><td style="text-align: center; border-right: 2px solid #999;">0.24</td><td style="text-align: center;">0.46</td></tr>
+              <tr><td>Pers.</td><td style="text-align: center;">0.65</td><td style="text-align: center; border-right: 1px solid #ddd;">0.38</td><td style="text-align: center; border-right: 2px solid #999;">0.43</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.45</td><td style="text-align: center; border-right: 2px solid #999;">0.51</td><td style="text-align: center;">0.44</td></tr>
+              <tr><td>Pol.</td><td style="text-align: center;">0.68</td><td style="text-align: center; border-right: 1px solid #ddd;">0.45</td><td style="text-align: center; border-right: 2px solid #999;">0.42</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.47</td><td style="text-align: center; border-right: 2px solid #999;">0.35</td><td style="text-align: center;">0.36</td></tr>
+              <tr><td>Sports</td><td style="text-align: center;">0.67</td><td style="text-align: center; border-right: 1px solid #ddd;">0.46</td><td style="text-align: center; border-right: 2px solid #999;">0.44</td><td style="text-align: center;">0.72</td><td style="text-align: center; border-right: 1px solid #ddd;">0.44</td><td style="text-align: center; border-right: 2px solid #999;">0.29</td><td style="text-align: center;">0.50</td></tr>
+
+              <!-- Qwen3-VL-8B -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>Qwen3-VL-8B</code></td>
+                <td>Cult.</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.53</td><td style="text-align: center; border-right: 2px solid #999;">0.53</td><td style="text-align: center;">0.67</td><td style="text-align: center; border-right: 1px solid #ddd;">0.40</td><td style="text-align: center; border-right: 2px solid #999;">0.59</td><td style="text-align: center;">0.57</td>
+              </tr>
+              <tr><td>Food</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.49</td><td style="text-align: center; border-right: 2px solid #999;">0.66</td><td style="text-align: center;">0.66</td><td style="text-align: center; border-right: 1px solid #ddd;">0.37</td><td style="text-align: center; border-right: 2px solid #999;">0.60</td><td style="text-align: center;">0.64</td></tr>
+              <tr><td>Hist.</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.54</td><td style="text-align: center; border-right: 2px solid #999;">0.66</td><td style="text-align: center;">0.67</td><td style="text-align: center; border-right: 1px solid #ddd;">0.38</td><td style="text-align: center; border-right: 2px solid #999;">0.60</td><td style="text-align: center;">0.68</td></tr>
+              <tr><td>M&amp;M</td><td style="text-align: center;">0.68</td><td style="text-align: center; border-right: 1px solid #ddd;">0.37</td><td style="text-align: center; border-right: 2px solid #999;">0.25</td><td style="text-align: center;">0.82</td><td style="text-align: center; border-right: 1px solid #ddd;">0.47</td><td style="text-align: center; border-right: 2px solid #999;">0.39</td><td style="text-align: center;">0.26</td></tr>
+              <tr><td>Nat. Achv.</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.57</td><td style="text-align: center; border-right: 2px solid #999;">0.69</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.50</td><td style="text-align: center; border-right: 2px solid #999;">0.50</td><td style="text-align: center;">0.70</td></tr>
+              <tr><td>Nature</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.52</td><td style="text-align: center; border-right: 2px solid #999;">0.37</td><td style="text-align: center;">0.59</td><td style="text-align: center; border-right: 1px solid #ddd;">0.35</td><td style="text-align: center; border-right: 2px solid #999;">0.46</td><td style="text-align: center;">0.38</td></tr>
+              <tr><td>Pers.</td><td style="text-align: center;">0.64</td><td style="text-align: center; border-right: 1px solid #ddd;">0.43</td><td style="text-align: center; border-right: 2px solid #999;">0.42</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.51</td><td style="text-align: center; border-right: 2px solid #999;">0.45</td><td style="text-align: center;">0.44</td></tr>
+              <tr><td>Pol.</td><td style="text-align: center;">0.67</td><td style="text-align: center; border-right: 1px solid #ddd;">0.47</td><td style="text-align: center; border-right: 2px solid #999;">0.39</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.47</td><td style="text-align: center; border-right: 2px solid #999;">0.41</td><td style="text-align: center;">0.44</td></tr>
+              <tr><td>Sports</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.58</td><td style="text-align: center; border-right: 2px solid #999;">0.51</td><td style="text-align: center;">0.72</td><td style="text-align: center; border-right: 1px solid #ddd;">0.47</td><td style="text-align: center; border-right: 2px solid #999;">0.46</td><td style="text-align: center;">0.49</td></tr>
+
+              <!-- GPT-4.1-mini -->
+              <tr>
+                <td rowspan="9" style="text-align: center; vertical-align: middle; font-weight: bold;"><code>GPT-4.1-mini</code></td>
+                <td>Cult.</td><td style="text-align: center;">0.72</td><td style="text-align: center; border-right: 1px solid #ddd;">0.57</td><td style="text-align: center; border-right: 2px solid #999;">0.64</td><td style="text-align: center;">0.72</td><td style="text-align: center; border-right: 1px solid #ddd;">0.57</td><td style="text-align: center; border-right: 2px solid #999;">0.60</td><td style="text-align: center;">0.69</td>
+              </tr>
+              <tr><td>Food</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.54</td><td style="text-align: center; border-right: 2px solid #999;">0.69</td><td style="text-align: center;">0.72</td><td style="text-align: center; border-right: 1px solid #ddd;">0.56</td><td style="text-align: center; border-right: 2px solid #999;">0.61</td><td style="text-align: center;">0.78</td></tr>
+              <tr><td>Hist.</td><td style="text-align: center;">0.72</td><td style="text-align: center; border-right: 1px solid #ddd;">0.55</td><td style="text-align: center; border-right: 2px solid #999;">0.60</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.56</td><td style="text-align: center; border-right: 2px solid #999;">0.56</td><td style="text-align: center;">0.63</td></tr>
+              <tr><td>M&amp;M</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.50</td><td style="text-align: center; border-right: 2px solid #999;">0.43</td><td style="text-align: center;">0.87</td><td style="text-align: center; border-right: 1px solid #ddd;">0.55</td><td style="text-align: center; border-right: 2px solid #999;">0.35</td><td style="text-align: center;">0.43</td></tr>
+              <tr><td>Nat. Achv.</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.60</td><td style="text-align: center; border-right: 2px solid #999;">0.58</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.58</td><td style="text-align: center; border-right: 2px solid #999;">0.56</td><td style="text-align: center;">0.73</td></tr>
+              <tr><td>Nature</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.62</td><td style="text-align: center; border-right: 2px solid #999;">0.41</td><td style="text-align: center;">0.71</td><td style="text-align: center; border-right: 1px solid #ddd;">0.59</td><td style="text-align: center; border-right: 2px solid #999;">0.35</td><td style="text-align: center;">0.56</td></tr>
+              <tr><td>Pers.</td><td style="text-align: center;">0.66</td><td style="text-align: center; border-right: 1px solid #ddd;">0.49</td><td style="text-align: center; border-right: 2px solid #999;">0.50</td><td style="text-align: center;">0.69</td><td style="text-align: center; border-right: 1px solid #ddd;">0.50</td><td style="text-align: center; border-right: 2px solid #999;">0.45</td><td style="text-align: center;">0.73</td></tr>
+              <tr><td>Pol.</td><td style="text-align: center;">0.68</td><td style="text-align: center; border-right: 1px solid #ddd;">0.52</td><td style="text-align: center; border-right: 2px solid #999;">0.39</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.51</td><td style="text-align: center; border-right: 2px solid #999;">0.46</td><td style="text-align: center;">0.56</td></tr>
+              <tr><td>Sports</td><td style="text-align: center;">0.70</td><td style="text-align: center; border-right: 1px solid #ddd;">0.57</td><td style="text-align: center; border-right: 2px solid #999;">0.47</td><td style="text-align: center;">0.74</td><td style="text-align: center; border-right: 1px solid #ddd;">0.55</td><td style="text-align: center; border-right: 2px solid #999;">0.45</td><td style="text-align: center;">0.56</td></tr>
+            </tbody>
+          </table>
+          <p style="text-align:center">
+            <b>Full results by model and domain for Urdu Language.</b>
           </p>
         </div>
       </div>
