@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="Q2E: Query-to-Event Decomposition for Zero-Shot Multilingual Text-to-Video Retrieval">
+  <meta property="og:title"
+    content="Q2E: Query-to-Event Decomposition for Zero-Shot Multilingual Text-to-Video Retrieval" />
+  <meta property="og:description" content="Q2E: Query-to-Event Decomposition for Zero-Shot Multilingual Text-to-Video Retrieval" />
+  <meta property="og:url" content="https://dipta007.github.io/Q2E/" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/images/main_with_asr.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+
+  <meta name="twitter:title"
+    content="Q2E: Query-to-Event Decomposition for Zero-Shot Multilingual Text-to-Video Retrieval">
+  <meta name="twitter:description" content="Q2E: Query-to-Event Decomposition for Zero-Shot Multilingual Text-to-Video Retrieval">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/main_with_asr.webp">
+  <meta name="twitter:card" content="static/images/main_with_asr.webp">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="text-to-video, retrieval, video search, msrvtt, multivent">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q2E</title>
+
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.16.0/gradio.js"></script>
+</head>
+
+<style>
+  .text-with-background {
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .gif-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .gif-wrapper {
+    width: 80%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+  }
+
+  .gif-wrapper img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .expandable-card .card-text-container {
+    max-height: 200px;
+    overflow-y: hidden;
+    position: relative;
+  }
+
+  .expandable-card.expanded .card-text-container {
+    max-height: none;
+  }
+
+  .expand-btn {
+    position: relative;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* margin-top: -20px; */
+    /* justify-content: center; */
+    color: #510c75;
+    border-color: transparent;
+  }
+
+  .expand-btn:hover {
+    background-color: rgba(200, 200, 200, 0.8);
+    text-decoration: none;
+    border-color: transparent;
+    color: #510c75;
+  }
+
+  .expand-btn:focus {
+    outline: none;
+    text-decoration: none;
+  }
+
+  .expandable-card:not(.expanded) .card-text-container:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1));
+  }
+
+  .expandable-card:not(.expanded) .expand-btn {
+    margin-top: -40px;
+  }
+
+  .card-body {
+    padding-bottom: 5px;
+  }
+
+  .vertical-flex-layout {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .figure-img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .adjustable-font-size {
+    font-size: calc(0.5rem + 2vw);
+  }
+
+  .chat-history {
+    flex-grow: 1;
+    overflow-y: auto;
+    /* overflow-x: hidden; */
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  #gradio pre {
+    background-color: transparent;
+  }
+</style>
+
+<body>
+
+  <!----------------------------------------- Title and Authors. --------------------------------------------------->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title is-bold">
+              <!-- <img id="painting_icon" width="5%" src="static/images/logo.png"> -->
+              Q<sub>2</sub>E
+            </h1>
+            <h2 class="subtitle is-3 publication-subtitle"><b><u>Q</u></b>uery-to-<b><u>E</u></b>vent Decomposition for
+              Zero-Shot
+              <br>
+              Multilingual Text-to-Video Retrieval</h2>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://roydipta.com" target="_blank">Shubhashis Roy Dipta</a>,
+                <a href="https://userpages.cs.umbc.edu/ferraro/" target="_blank">Frank Ferraro</a>
+                <br>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">University of Maryland, Baltimore County</span>
+              <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2506.10202" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://github.com/dipta007/Q2E" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://huggingface.co/collections/dipta007/q2e-query-to-event-decomposition-for-zero-shot-multilingual"
+                    target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      🤗
+                    </span>
+                    <span>Data</span>
+                  </a>
+                </span>
+
+                <!-- <span class="link-block">
+                  <a href="#missing" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-database"></i>
+                    </span>
+                    <span>Ablation Data</span>
+                  </a>
+                </span> -->
+
+                <!-- ArXiv abstract Link -->
+                <!-- <span class="link-block">
+                  <a href="#missing" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span> -->
+
+                <!-- <span class="link-block">
+                  <a href="https://huggingface.co/TIGER-Lab/VideoScore" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      🔥 
+                    </span>
+                    <span>Model</span>
+                  </a>
+                </span>
+                <br> -->
+
+                <!-- <span class="link-block">
+                  <a href="https://huggingface.co/spaces/TIGER-Lab/VideoScore-Leaderboard" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      🤗
+                    </span>
+                    <span>Leaderboard</span>
+                  </a>
+                </span> -->
+
+                <!-- <span class="link-block">
+                  <a href="https://huggingface.co/spaces/TIGER-Lab/VideoScore" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      🤗
+                    </span>
+                    <span>Space</span>
+                  </a>
+                </span> -->
+
+                <!-- <span class="link-block">
+                  <a href="https://twitter.com/DongfuJiang/status/1805438506137010326"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon has-text-white">
+                      <i class="fab fa-twitter"></i>
+                    </span>
+                    <span>Twitter</span>
+                  </a>
+                </span> -->
+
+              </div>
+            </div>
+
+            <centering>
+              <div style="text-align: center;">
+                <span style="
+                  display: inline-block;
+                  background: #ffe082;
+                  color: #b12a00;
+                  font-weight: bold;
+                  font-size: 1em;
+                  border-radius: 10px;
+                  padding: 0.25em 1em;
+                  margin: 0.5em auto;
+                  box-shadow: 0 0 6px 1px #ffd54f70;
+                  letter-spacing: 1px;
+                  border: 2px solid #ffb300;
+                ">
+                  🔥 Accepted at <span style="color:#1565c0;">AACL 2025</span> 🔥
+                </span>
+              </div>
+            </centering>
+
+            <!-- <centering>
+              <div style="text-align: center;">
+                <img id="teaser" style="max-height: 20em !important" src="static/images/intro_final.png">
+              </div>
+            </centering> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!----------------------------------------- Abstract. --------------------------------------------------->
+  <section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h2 class="title is-3">
+        Abstract</h2>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+          <div class="content has-text-justified" style="flex: 2;">
+            <p>
+              Recent approaches have shown impressive proficiency in extracting and leveraging parametric knowledge from
+              Large-Language Models (LLMs) and Vision-Language Models (VLMs). In this work, we consider how we can
+              improve the retrieval of videos related to complex real-world events by automatically extracting latent
+              parametric knowledge about those events. We present <strong>Q<sub>2</sub>E</strong>: a
+              <u>Q</u>uery-to-<u>E</u>vent decomposition method for zero-shot multilingual text-to-video retrieval,
+              adaptable across datasets, domains, LLMs, or VLMs. Our approach demonstrates that we can enhance the
+              understanding of otherwise overly simplified human queries by decomposing the query using the knowledge
+              embedded in LLMs and VLMs. We additionally show how to apply our approach to both visual and speech-based
+              inputs. To combine this varied multimodal knowledge, we adopt entropy-based fusion scoring for zero-shot
+              fusion. <strong>Q<sub>2</sub>E</strong> outperforms the previous SOTA on the MultiVENT dataset by
+              <strong>8 NDCG points</strong>, while improving on MSR-VTT and MSVD by <strong>4 and 3 points</strong>,
+              respectively, outperforming several existing retrieval methods, including many fine-tuned and SOTA
+              zero-shot approaches.
+              </li>
+              </ol>
+            </p>
+          </div>
+          <div style="flex: 1;">
+            <img id="teaser" src="static/images/intro_final.webp">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!----------------------------------------- Abstract. --------------------------------------------------->
+  <section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h2 class="title is-3">
+        Method</h2>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+
+          <div class="content has-text-justified">
+
+            <centering>
+              <div style="flex: 1; display: flex; justify-content: center;">
+                <img src="static/images/main_with_asr.webp">
+              </div>
+            </centering>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!----------------------------------------- Sample Data --------------------------------------------------->
+  <section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h2 class="title is-3">
+        Sample Data</h2>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+
+          <div class="content has-text-justified">
+
+            <centering>
+              <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                <h3><b>Query:</b> November 30 earthquake in South Central Alaska 2018</h3>
+                <iframe width="708" height="400" src="https://www.youtube.com/embed/6SReDtBCT-Y?si=4pOUH6PfINos_T6S"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                <h3>Query Decomposition</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                  <thead>
+                    <tr style="background-color: #f5f5f5;">
+                      <th style="padding: 12px; border: 1px solid #ddd; text-align: left;">Prequel</th>
+                      <th style="padding: 12px; border: 1px solid #ddd; text-align: left;">Current</th>
+                      <th style="padding: 12px; border: 1px solid #ddd; text-align: left;">Sequel</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Buildings shaking and
+                        swaying due to the earthquake in Anchorage, Alaska, on November 30, 2018</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Buildings shaking and
+                        crumbling during the 30 November 2018 earthquake in Anchorage, Alaska, South Central Alaska</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Buildings crumbling or
+                        collapsing during the November 30, 2018 earthquake in Anchorage, Alaska</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">People running out of
+                        buildings and evacuating the area in Anchorage, Alaska during the earthquake on
+                        November 30, 2018</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">People running out of
+                        buildings and evacuating the area during the 30 November 2018 Anchorage, Alaska earthquake</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">People running for cover
+                        or evacuating buildings during the November 30, 2018 earthquake in Anchorage, Alaska
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Cars stopped on the road
+                        as the earthquake strikes in Anchorage, Alaska on November 30, 2018 at</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Emergency responders
+                        rushing to the scene after the 2018 Anchorage, Alaska earthquake on November 30, 2018</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Emergency vehicles rushing
+                        to the scene of the 2018 Anchorage, Alaska earthquake on November 30, 2018
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Debris and objects falling
+                        from shelves and ceilings during the 30 November 2018 Anchorage, Alaska earthquake</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Debris falling from
+                        buildings and damaging streets during the November 30, 2018 earthquake in
+                        Anchorage, South Central Alaska</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Cracks forming in roads
+                        and highways in Anchorage, Alaska, South Central Alaska, after the 30 November 2018 earthquake
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Emergency responders
+                        rushing to the scene to assist with evacuation and relief efforts after the 30 November 2018
+                        earthquake in Anchorage, Alaska, South Central Alaska</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Cars stopped or abandoned
+                        on the road in Anchorage, Alaska, South Central Alaska due to the earthquake on
+                        November 30, 2018</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">Debris falling from
+                        damaged structures during the 30 November 2018 earthquake in Anchorage, Alaska</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <h3>Video Decomposition*</h3>
+                <small>* Frame captions were omitted for readability</small>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                  <thead>
+                    <tr style="background-color: #f5f5f5;">
+                      <th colspan="2" style="padding: 12px; border: 1px solid #ddd; text-align: left;">Video Caption
+                        (w/o ASR)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="2" style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">
+                        The video begins at an airport terminal where a person in a red shirt is engaged in a
+                        conversation, then abruptly shifts to a nighttime outdoor setting showing a silver SUV parked on
+                        a
+                        snow-covered driveway, captured by a security camera. The scene then transitions to a person
+                        entering a home with two dogs, followed by the person carrying a large object across a room. The
+                        video then cuts to a news report covering a significant road collapse in a snowy area, with
+                        emergency responders and vehicles present. A news anchor, Sebastián Martínez Valdivia, provides
+                        commentary on the incident from an office setting. The report expands to cover seismic activity
+                        around the Aleutian Islands, Alaska, displaying maps from the U.S. Geological Survey. The video
+                        then shows scenic views of a snow-capped mountain range and a body of water, followed by a
+                        helicopter flying over a snowy landscape, suggesting a search and rescue operation. An aerial
+                        view
+                        of a large hole in the ground adjacent to a highway is shown, emphasizing the impact of natural
+                        disasters. The video concludes with an interior view of a dimly lit room, possibly shifting
+                        focus
+                        to the human impact or response to the situation. Overall, the video appears to cover various
+                        aspects of natural disasters, including road collapses, seismic activity, and rescue operations,
+                        interspersed with scenes that may relate to the personal or human side of these events.
+                      </td>
+                    </tr>
+                  </tbody>
+
+                  <thead>
+                    <tr style="background-color: #f5f5f5;">
+                      <th style="padding: 12px; border: 1px solid #ddd; text-align: left;">Video Caption (with ASR)</th>
+                      <th style="padding: 12px; border: 1px solid #ddd; text-align: left;">ASR Transcript</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">
+                        A 7.0 magnitude earthquake struck Anchorage, Alaska, causing significant damage and disruption
+                        to the city's infrastructure. The quake, which occurred on a Friday morning, triggered a tsunami
+                        warning that was later canceled, and resulted in major infrastructure damage, fires, and power
+                        outages affecting up to a third of the local power company's customers. The earthquake was
+                        followed by over 30 aftershocks in the subsequent three hours, with magnitudes ranging from 2.7
+                        to 5.7. The event prompted Alaska's Governor to issue a disaster declaration and tour the damage
+                        from the air with the state's National Guard. The video depicts various scenes of the
+                        earthquake's impact, including damaged roadways, landslides, and emergency response efforts, as
+                        well as serene landscapes and news reports providing updates on the situation. The footage also
+                        shows the effects of the earthquake on local residents, with home security cameras capturing the
+                        disturbance and damage within household settings. Overall, the video provides a comprehensive
+                        view of the earthquake's impact and the subsequent response efforts in Anchorage, Alaska.
+                      </td>
+                      <td style="padding: 12px; border: 1px solid #ddd; vertical-align: top;">
+                        A 7.0 magnitude earthquake hit Anchorage, Alaska on Friday morning, causing significant damage.
+                        A local resident's home security system captured the sounds of the quake, which showed lights in
+                        the distance suddenly disappearing, followed by multiple bright flashes. The quake hit at about
+                        8:30 a.m. local time. A tsunami warning was issued, but it was canceled shortly after. The
+                        Anchorage Police Department reported major infrastructure damage across the city, with at least
+                        three fires breaking out and videos showing significant damage to roadways. The local power
+                        company stated that up to a third of its customers were without power, a major concern in a
+                        region where high temperatures are in the low 20s to mid 30s. In the three hours following the
+                        earthquake, the U.S. Geological Survey recorded over 30 aftershocks with magnitudes ranging from
+                        2.7 to 5.7. Aftershocks are common in Alaska. The Anchorage region is home to more than half of
+                        the state's population. Alaska's Governor, Bill Walker, issued a disaster declaration before
+                        touring the damage with the state's National Guard.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </centering>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h2 class="title is-3">
+        Results</h2>
+    </div>
+  </section>
+
+  <section class="section">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-12 has-text-centered">
+
+          <div class="model-labels-container is-size-5">
+            <span><b>Baseline Encoders</b>:</span>
+            <a href="https://arxiv.org/abs/2306.02329" target="_blank" style="padding: 5px 10px;">MultiCLIP (MC)</a>,
+            <a href="https://arxiv.org/abs/2403.15377v4" target="_blank" style="padding: 5px 10px;">InternVideo2-1b
+              (IV2)</a>
+            <p></p>
+          </div>
+          <div class="model-labels-container is-size-5">
+            <span><b>Datasets</b>:</span>
+            <span style="background-color: rgba(110, 194, 134, 0.15);padding: 5px 10px;">MultiVENT</span>
+            <span style="background-color: rgba(255, 208, 80, 0.15);padding: 5px 10px;">MSR-VTT-1kA</span>
+            <p></p>
+          </div>
+
+          <table class="table is-bordered" style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="background-color: rgba(211, 211, 211, 0.5);">
+                <th>Method</th>
+                <th>Pre@1 ↑</th>
+                <th>Pre@5 ↑</th>
+                <th>Pre@10 ↑</th>
+                <th>Re@1 ↑</th>
+                <th>Re@5 ↑</th>
+                <th>Re@10 ↑</th>
+                <th>MRR ↑</th>
+                <th>NDCG ↑</th>
+                <th>MAP ↑</th>
+                <th>Mean Rank ↓</th>
+                <th>Median Rank ↓</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background-color: rgba(110, 194, 134, 0.15);">
+                <td>MC</td>
+                <td><u>9.83</u></td>
+                <td><u>44.32</u></td>
+                <td><u>70.82</u></td>
+                <td><u>88.80</u></td>
+                <td><u>80.77</u></td>
+                <td><u>65.25</u></td>
+                <td><u>0.92</u></td>
+                <td><u>75.34</u></td>
+                <td><u>86.33</u></td>
+                <td><u>22.12</u></td>
+                <td><u><b>6</b></u></td>
+              </tr>
+              <tr style="background-color: rgba(110, 194, 134, 0.15);">
+                <td>IV2</td>
+                <td>5.60</td>
+                <td>28.92</td>
+                <td>49.12</td>
+                <td>51.35</td>
+                <td>53.28</td>
+                <td>45.44</td>
+                <td>0.68</td>
+                <td>50.43</td>
+                <td>63.77</td>
+                <td>235.49</td>
+                <td>11</td>
+              </tr>
+
+              <tr style="background-color: rgba(110, 194, 134, 0.15);">
+                <td>MC + Q<sub>2</sub>E</td>
+                <td>10.24</td>
+                <td>46.71</td>
+                <td>75.76</td>
+                <td>92.28</td>
+                <td>85.25</td>
+                <td>69.73</td>
+                <td><b>0.95</b></td>
+                <td>80.04</td>
+                <td>89.42</td>
+                <td>21.13</td>
+                <td><b>6</b></td>
+              </tr>
+              <tr style="background-color: rgba(110, 194, 134, 0.15);">
+                <td>MC + Q<sub>2</sub>E + ASR</td>
+                <td><b>10.32</b></td>
+                <td><b>49.00</b></td>
+                <td><b>79.60</b></td>
+                <td><b>93.05</b></td>
+                <td><b>88.73</b></td>
+                <td><b>73.09</b></td>
+                <td><b>0.95</b></td>
+                <td><b>83.24</b></td>
+                <td><b>91.20</b></td>
+                <td><b>16.44</b></td>
+                <td><b>6</b></td>
+              </tr>
+
+
+              <tr style="background-color: rgba(110, 194, 134, 0.15);">
+                <td>IV2 + Q<sub>2</sub>E</td>
+                <td>9.54</td>
+                <td>40.88</td>
+                <td>63.40</td>
+                <td>87.26</td>
+                <td>75.21</td>
+                <td>58.73</td>
+                <td>0.92</td>
+                <td>69.15</td>
+                <td>83.96</td>
+                <td>53.84</td>
+                <td>7</td>
+              </tr>
+              <tr style="background-color: rgba(110, 194, 134, 0.15);">
+                <td>IV2 + Q<sub>2</sub>E + ASR</td>
+                <td>10.24</td>
+                <td>44.94</td>
+                <td>70.79</td>
+                <td>92.28</td>
+                <td>81.85</td>
+                <td>65.14</td>
+                <td><b>0.95</b></td>
+                <td>76.10</td>
+                <td>88.09</td>
+                <td>42.81</td>
+                <td><b>6</b></td>
+              </tr>
+
+
+              <tr style="background-color: rgba(255, 208, 80, 0.15);">
+                <td>MC</td>
+                <td>43.52</td>
+                <td>69.05</td>
+                <td>76.88</td>
+                <td>43.62</td>
+                <td>13.85</td>
+                <td>7.71</td>
+                <td>0.54</td>
+                <td>59.72</td>
+                <td>54.27</td>
+                <td><u>20.29</u></td>
+                <td>2</td>
+              </tr>
+              <tr style="background-color: rgba(255, 208, 80, 0.15);">
+                <td>IV2</td>
+                <td><u>52.56</u></td>
+                <td><u>73.07</u></td>
+                <td><u>80.10</u></td>
+                <td><u>52.66</u></td>
+                <td><u>14.65</u></td>
+                <td><u>8.03</u></td>
+                <td><u>0.62</u></td>
+                <td><u>66.07</u></td>
+                <td><u>61.62</u></td>
+                <td>25.12</td>
+                <td><u><b>1</b></u></td>
+              </tr>
+
+              <tr style="background-color: rgba(255, 208, 80, 0.15);">
+                <td>MC + Q<sub>2</sub>E</td>
+                <td>44.52</td>
+                <td>71.26</td>
+                <td>79.40</td>
+                <td>44.62</td>
+                <td>14.29</td>
+                <td>7.96</td>
+                <td>0.56</td>
+                <td>61.51</td>
+                <td>55.84</td>
+                <td>17.91</td>
+                <td>2</td>
+              </tr>
+              <tr style="background-color: rgba(255, 208, 80, 0.15);">
+                <td>MC + Q<sub>2</sub>E + ASR</td>
+                <td>46.23</td>
+                <td>73.37</td>
+                <td>81.71</td>
+                <td>46.33</td>
+                <td>14.71</td>
+                <td>8.19</td>
+                <td>0.58</td>
+                <td>63.59</td>
+                <td>57.83</td>
+                <td>18.73</td>
+                <td>2</td>
+              </tr>
+              <tr style="background-color: rgba(255, 208, 80, 0.15);">
+                <td>IV2 + Q<sub>2</sub>E</td>
+                <td>53.47</td>
+                <td>73.57</td>
+                <td>82.11</td>
+                <td>53.57</td>
+                <td>14.75</td>
+                <td>8.23</td>
+                <td>0.62</td>
+                <td>67.16</td>
+                <td>62.47</td>
+                <td>16.73</td>
+                <td><b>1</b></td>
+              </tr>
+              <tr style="background-color: rgba(255, 208, 80, 0.15);">
+                <td>IV2 + Q<sub>2</sub>E+ ASR</td>
+                <td><b>56.28</b></td>
+                <td><b>76.58</b></td>
+                <td><b>83.72</b></td>
+                <td><b>56.38</b></td>
+                <td><b>15.36</b></td>
+                <td><b>8.39</b></td>
+                <td><b>0.65</b></td>
+                <td><b>69.53</b></td>
+                <td><b>65.06</b></td>
+                <td><b>15.85</b></td>
+                <td><b>1</b></td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="text-align:center">
+            The best score for each dataset is <b>in bold</b> and the best in baselines is <u>underlined</u>.<br>
+            More ablation results are presented in the paper.
+            <!--"-" means the answer of MLLM is meaningless or in wrong format. -->
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- <section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h2 class="title is-3">
+        <span style="vertical-align: middle">Failure Studies</span>
+      </h2>
+    </div>
+  </section> -->
+
+  <!--  -->
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+@article{dipta2025q2e,
+  title={Q2E: Query-to-Event Decomposition for Zero-Shot Multilingual Text-to-Video Retrieval},
+  author={Dipta, Shubhashis Roy and Ferraro, Francis},
+  journal={arXiv preprint arXiv:2506.10202},
+  year={2025}
+}
+    </code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you link back to this page in the
+              footer. <br> This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Statcounter tracking code -->
+
+  <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+  <!-- Default Statcounter code for Q2E https://dipta007.github.io/Q2E/ -->
+  <script type="text/javascript">
+    var sc_project = 13178977;
+    var sc_invisible = 1;
+    var sc_security = "529eacac"; 
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript>
+    <div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img
+          class="statcounter" src="https://c.statcounter.com/13178977/0/529eacac/1/" alt="Web Analytics"
+          referrerPolicy="no-referrer-when-downgrade"></a></div>
+  </noscript>
+  <!-- End of Statcounter Code -->
+  <a href="https://statcounter.com/p13178977/?guest=1">View My Stats</a>
+
+  <!-- End of Statcounter Code -->
+
+</body>
+
+</html>
